@@ -4,3 +4,40 @@ release/
 .DS_Store
 *.log
 projects/
+
+# Local configuration and credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.credentials
+credentials.json
+secrets.json
+
+# Local editor, operating-system, and test artifacts
+.vscode/
+.idea/
+Thumbs.db
+Desktop.ini
+coverage/
+.nyc_output/
+tmp/
+temp/
+
+# User-generated media and content
+output/
+outputs/
+recordings/
+transcripts/
+drafts/
+*.mp4
+*.mov
+*.mkv
+*.webm
+*.avi
+
+# Internal agent notes
+AGENTS.md

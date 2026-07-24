@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; img-src 'self' data: file:; style-src 'self' 'unsafe-inline'; font-src 'self' data:; script-src 'self';"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BCEP Content Studio</title>
+    <link rel="stylesheet" href="../../dist/renderer.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="brand-lockup">
+          <img src="../../assets/app-icon-source.png" alt="" class="app-logo" />
+          <div>
+            <strong>BCEP Content Studio</strong>
+            <span>Video to website content</span>
+          </div>
+        </div>
+        <div class="project-path">
+          <span>Project folder</span>
+          <button id="outputPathButton" class="path-button" type="button">
+            Loading…
+          </button>
+          <button id="openOutputButton" class="icon-button" type="button">
+            Open folder
+          </button>
+        </div>
+      </header>
+
+      <div class="workspace">
+        <aside class="sidebar">
+          <p class="nav-label">Workflow</p>
+          <button class="nav-item active" data-view="feature" type="button">
+            <span class="nav-number">01</span>
+            <span>
+              <strong>Feature Image</strong>
+              <small>Pull and brand a video frame</small>
+            </span>
+          </button>
+          <button class="nav-item" data-view="article" type="button">
+            <span class="nav-number">02</span>
+            <span>
+              <strong>Blog Article</strong>
+              <small>Turn a transcript into a post</small>
+            </span>
+          </button>
+          <button class="nav-item" data-view="pipeline" type="button">
+            <span class="nav-number">03</span>
+            <span>
+              <strong>Workflow</strong>
+              <small>Run both tools in order</small>
+            </span>
+          </button>
+
+          <div class="sidebar-note">
+            <span class="status-dot"></span>
+            <div>
+              <strong>Expandable foundation</strong>
+              <p>Future modules can plug into this workflow.</p>
+            </div>
+          </div>
+        </aside>
+
+        <main class="content-area">
+          <section id="featureView" class="view active">
+            <div class="view-heading">
+              <div>
+                <p class="kicker">MODULE 01</p>
+                <h1>Create a feature image</h1>
+                <p>Choose a moment from your OBS recording and apply the BCEP visual system.</p>
+              </div>
+              <span class="format-pill">1200 × 630 WEB JPG</span>
+            </div>
+
+            <div class="two-column">
+              <div class="panel controls-panel">
+                <div class="field">
+                  <label>Source video</label>
+                  <button id="chooseVideoButton" class="file-picker" type="button">
+                    <span id="videoFileName">Choose an OBS recording</span>
+                    <b>Browse</b>
+                  </button>
+                  <p id="videoMeta" class="field-help">MP4, MOV, MKV, WebM or AVI</p>
+                </div>
+
+                <div class="field">
+                  <div class="label-row">
+                    <label for="timestampRange">Frame timestamp</label>
+                    <output id="timestampLabel">00:00.0</output>
+                  </div>
+                  <input id="timestampRange" type="range" min="0" max="60" value="0" step="0.1" />
+                  <div class="inline-actions">
+                    <input id="timestampNumber" type="number" min="0" value="0" step="0.1" />
+                    <button id="previewFrameButton" class="secondary-button" type="button">
+                      Preview frame
+                    </button>
+                  </div>
+                </div>
+
+                <div class="field">
+                  <label for="featureTitle">Headline</label>
+                  <input id="featureTitle" type="text" value="NUMBER SEQUENCING" maxlength="58" />
+                </div>
+
+                <div class="field">
+                  <label for="featureEyebrow">Yellow label</label>
+                  <input id="featureEyebrow" type="text" value="PASS THE APTITUDE TEST" maxlength="40" />
+                </div>
+
+                <div class="field">
+                  <label for="featureFooter">Supporting line</label>
+                  <input id="featureFooter" type="text" value="3 METHODS TO FIND THE PATTERN" maxlength="55" />
+                </div>
+
+                <button id="generateFeatureButton" class="primary-button" type="button">
+                  Create BCEP feature image
+                </button>
+              </div>
+
+              <div class="panel preview-panel">
+                <div class="panel-title">
+                  <div>
+                    <span>Preview</span>
+                    <small id="featureStatus">No video selected</small>
+                  </div>
+                  <button id="showFeatureButton" class="text-button hidden" type="button">
+                    Show file
+                  </button>
+                </div>
+                <div id="featurePreviewEmpty" class="preview-empty">
+                  <div class="preview-mark">BCEP</div>
+                  <strong>Your feature image appears here</strong>
+                  <span>Select a video and preview a frame.</span>
+                </div>
+                <img id="featurePreview" class="feature-preview hidden" alt="Generated feature image preview" />
+              </div>
+            </div>
+          </section>
+
+          <section id="articleView" class="view">
+            <div class="view-heading">
+              <div>
+                <p class="kicker">MODULE 02</p>
+                <h1>Generate a blog article</h1>
+                <p>Give Codex your transcript and receive an editable, SEO-ready Markdown draft.</p>
+              </div>
+              <span id="codexBadge" class="format-pill warning">Checking Codex…</span>
+            </div>
+
+            <div class="article-layout">
+              <div class="panel controls-panel">
+                <div class="field">
+                  <label for="articleTitle">Article topic</label>
+                  <input id="articleTitle" type="text" value="How to Solve Number Sequencing Questions" />
+                </div>
+
+                <div class="field">
+                  <div class="label-row">
+                    <label for="transcriptText">Video transcript</label>
+                    <button id="chooseTranscriptButton" class="text-button" type="button">
+                      Load TXT, MD, SRT or VTT
+                    </button>
+                  </div>
+                  <textarea
+                    id="transcriptText"
+                    rows="11"
+                    placeholder="Paste the video transcript here or load a transcript file…"
+                  ></textarea>
+                  <p id="transcriptMeta" class="field-help">Codex will use the transcript as its factual source.</p>
+                </div>
+
+                <details class="advanced-options">
+                  <summary>Article options</summary>
+                  <div class="field">
+                    <label for="articleAudience">Audience</label>
+                    <input
+                      id="articleAudience"
+                      type="text"
+                      value="Beginners preparing for electrical union apprenticeship aptitude tests."
+                    />
+                  </div>
+                  <div class="field">
+                    <label for="articleCta">Call to action</label>
+                    <textarea id="articleCta" rows="3">Visit bluecollarexamprep.com for the free study guide and more apprenticeship exam preparation.</textarea>
+                  </div>
+                  <div class="field">
+                    <label for="articleExtra">Extra instructions</label>
+                    <textarea id="articleExtra" rows="3" placeholder="Optional tone, length, keyword or formatting requests…"></textarea>
+                  </div>
+                </details>
+
+                <button id="generateArticleButton" class="primary-button" type="button">
+                  Generate article with Codex
+                </button>
+                <p id="articleProgress" class="progress-copy"></p>
+              </div>
+
+              <div class="panel article-panel">
+                <div class="panel-title article-toolbar">
+                  <div>
+                    <span>Article draft</span>
+                    <small id="articleStatus">Markdown editor</small>
+                  </div>
+                  <div class="toolbar-actions">
+                    <button id="editArticleTab" class="mini-tab active" type="button">Edit</button>
+                    <button id="previewArticleTab" class="mini-tab" type="button">Preview</button>
+                    <button id="saveArticleButton" class="text-button" type="button" disabled>Save</button>
+                    <button id="showArticleButton" class="text-button hidden" type="button">Show file</button>
+                  </div>
+                </div>
+                <textarea id="articleEditor" class="article-editor" placeholder="Your generated article will appear here…"></textarea>
+                <article id="articlePreview" class="article-preview hidden"></article>
+              </div>
+            </div>
+          </section>
+
+          <section id="pipelineView" class="view">
+            <div class="view-heading">
+              <div>
+                <p class="kicker">MODULE 03</p>
+                <h1>Reusable content workflow</h1>
+                <p>The MVP keeps each step visible. This orchestration view is ready for expansion.</p>
+              </div>
+            </div>
+            <div class="pipeline-grid">
+              <div class="pipeline-card ready">
+                <span>01</span>
+                <strong>Choose video</strong>
+                <p>Select an OBS recording and the frame that represents the lesson.</p>
+              </div>
+              <div class="pipeline-arrow">→</div>
+              <div class="pipeline-card ready">
+                <span>02</span>
+                <strong>Create artwork</strong>
+                <p>Generate a 1200 × 630 web-optimized BCEP feature image.</p>
+              </div>
+              <div class="pipeline-arrow">→</div>
+              <div class="pipeline-card ready">
+                <span>03</span>
+                <strong>Write article</strong>
+                <p>Transform the transcript into an editable Markdown post.</p>
+              </div>
+            </div>
+            <div class="future-panel">
+              <p class="kicker">READY TO EXPAND</p>
+              <h2>Next modules can use the same project</h2>
+              <div class="future-tags">
+                <span>Transcription</span>
+                <span>TikTok clips</span>
+                <span>Captions</span>
+                <span>Social posts</span>
+                <span>Website publishing</span>
+                <span>Content calendar</span>
+              </div>
+            </div>
+          </section>
+        </main>
+      </div>
+
+      <section id="terminalPanel" class="terminal-panel">
+        <div class="terminal-header">
+          <div class="terminal-title">
+            <span class="terminal-lights"><i></i><i></i><i></i></span>
+            <strong>Codex Terminal</strong>
+            <small id="terminalCwd">Starting PowerShell…</small>
+          </div>
+          <div class="terminal-actions">
+            <button id="installCodexButton" type="button">Install Codex</button>
+            <button id="startCodexButton" type="button">Start Codex</button>
+            <button id="clearTerminalButton" type="button">Clear</button>
+            <button id="toggleTerminalButton" type="button">Collapse</button>
+          </div>
+        </div>
+        <div id="terminal"></div>
+      </section>
+    </div>
+
+    <div id="toast" class="toast" role="status"></div>
+    <script src="../../dist/renderer.js"></script>
+  </body>
+</html>

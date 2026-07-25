@@ -33,7 +33,7 @@ function createWindow() {
     height: 960,
     minWidth: 420,
     minHeight: 640,
-    backgroundColor: "#07101d",
+    backgroundColor: "#1a1a2e",
     title: "BCEP Content Studio",
     icon,
     webPreferences: {

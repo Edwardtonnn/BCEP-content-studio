@@ -17,4 +17,7 @@ test("blog prompt preserves the supplied transcript and BCEP requirements", () =
   assert.match(prompt, /Visit the BCEP website/);
   assert.match(prompt, /Keep it under 900 words/);
   assert.match(prompt, /Return Markdown only/);
+  assert.match(prompt, /transcript as the factual ceiling/i);
+  assert.match(prompt, /second person/i);
+  assert.match(prompt, /Do not use hype/i);
 });

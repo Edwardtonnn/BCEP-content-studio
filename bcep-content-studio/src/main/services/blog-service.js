@@ -21,11 +21,15 @@ AUDIENCE
 ${audience || "Beginners preparing for electrical union apprenticeship aptitude tests."}
 
 EDITORIAL REQUIREMENTS
-- Use a direct, encouraging blue-collar teaching voice.
+- Use a direct, practical, encouraging, beginner-friendly, trade-respectful voice.
+- Write in plain language, second person, like one tradesperson helping another.
+- Do not use hype, "guru" language, or corporate marketing language.
 - Do not invent personal stories, statistics, union requirements, application dates, or facts missing from the transcript.
+- Treat the transcript as the factual ceiling. Do not embellish beyond it.
+- Only use first-person founder framing when the transcript explicitly supports it.
 - Correct obvious transcription errors silently.
 - Explain the lesson more clearly than a raw transcript.
-- Use short paragraphs, descriptive H2 headings, and practical examples.
+- Use short paragraphs, descriptive H2 headings, and only practical examples supported by the transcript.
 - Include a concise introduction and conclusion.
 - Include a Key Takeaways section.
 - Include an SEO title, slug, and meta description in a YAML front matter block.

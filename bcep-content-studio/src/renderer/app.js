@@ -26,18 +26,18 @@ const terminal = new Terminal({
   fontSize: 13,
   lineHeight: 1.18,
   theme: {
-    background: "#03070c",
-    foreground: "#d8e8f7",
-    cursor: "#ffd000",
-    selectionBackground: "#145b8f88",
-    black: "#07101d",
-    brightBlack: "#52697e",
-    yellow: "#ffd000",
-    brightYellow: "#ffe05a",
-    blue: "#168fff",
-    brightBlue: "#4ab0ff",
-    cyan: "#37d6ff",
-    brightCyan: "#82e8ff"
+    background: "#1a1a2e",
+    foreground: "#ffffff",
+    cursor: "#ffb830",
+    selectionBackground: "#ffb83055",
+    black: "#16213e",
+    brightBlack: "#667085",
+    yellow: "#ffb830",
+    brightYellow: "#ffb830",
+    blue: "#7ec8e3",
+    brightBlue: "#5ba8d6",
+    cyan: "#7ec8e3",
+    brightCyan: "#7ec8e3"
   }
 });
 const fitAddon = new FitAddon();

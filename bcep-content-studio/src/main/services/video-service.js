@@ -51,7 +51,15 @@ function wrapHeadline(value, max = 19) {
     }
   }
   if (current) lines.push(current);
-  return lines.slice(0, 3);
+  const visibleLines = lines.slice(0, 3);
+  if (visibleLines.length === 1 && words.length > 1) {
+    const splitAt = Math.ceil(words.length / 2);
+    return [
+      words.slice(0, splitAt).join(" "),
+      words.slice(splitAt).join(" ")
+    ];
+  }
+  return visibleLines;
 }
 
 function featureOverlaySvg({ title, eyebrow, footer }) {
@@ -60,7 +68,7 @@ function featureOverlaySvg({ title, eyebrow, footer }) {
   const headline = lines
     .map(
       (line, index) =>
-        `<text x="68" y="${firstLineY + index * 98}" class="headline">${escapeXml(line)}</text>`
+        `<text x="68" y="${firstLineY + index * 92}" class="headline ${index === lines.length - 1 ? "headline-bold" : "headline-thin"}">${escapeXml(line)}</text>`
     )
     .join("");
 
@@ -68,37 +76,33 @@ function featureOverlaySvg({ title, eyebrow, footer }) {
     <svg width="${HERO_WIDTH}" height="${HERO_HEIGHT}" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient id="shade" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0" stop-color="#05080f" stop-opacity="0.98"/>
-          <stop offset="0.58" stop-color="#07152a" stop-opacity="0.86"/>
-          <stop offset="1" stop-color="#07152a" stop-opacity="0.16"/>
+          <stop offset="0" stop-color="#1a1a2e" stop-opacity="0.96"/>
+          <stop offset="0.58" stop-color="#16213e" stop-opacity="0.82"/>
+          <stop offset="1" stop-color="#16213e" stop-opacity="0.14"/>
         </linearGradient>
-        <pattern id="grid" width="42" height="42" patternUnits="userSpaceOnUse">
-          <path d="M 42 0 L 0 0 0 42" fill="none" stroke="#1597ff" stroke-opacity="0.13" stroke-width="1"/>
-        </pattern>
         <filter id="shadow"><feDropShadow dx="0" dy="5" stdDeviation="4" flood-color="#000" flood-opacity=".65"/></filter>
         <style>
-          .eyebrow { font: 800 23px Arial, sans-serif; letter-spacing: 4px; fill: #07101f; }
-          .headline { font: 900 83px Impact, Arial Black, sans-serif; letter-spacing: 1px; fill: #ffffff; filter: url(#shadow); }
-          .brand { font: 900 28px Arial Black, sans-serif; letter-spacing: 1px; fill: #081226; }
-          .footer { font: 700 20px Arial, sans-serif; letter-spacing: 1px; fill: #d9ecff; }
+          .eyebrow { font: 700 21px Oswald, "Arial Narrow", sans-serif; letter-spacing: 3px; fill: #1a1a2e; }
+          .headline { font-family: "Segoe UI", Arial, sans-serif; font-size: 78px; letter-spacing: -2px; filter: url(#shadow); }
+          .headline-thin { font-weight: 100; fill: #ffffff; }
+          .headline-bold { font-weight: 900; fill: #ffb830; }
+          .brand { font: 700 27px Oswald, "Arial Narrow", sans-serif; letter-spacing: 1.5px; fill: #1a1a2e; }
+          .footer { font: 600 19px Oswald, "Arial Narrow", sans-serif; letter-spacing: 1px; fill: rgba(255,255,255,0.82); }
         </style>
       </defs>
       <rect width="1200" height="630" fill="url(#shade)"/>
-      <rect width="1200" height="630" fill="url(#grid)"/>
-      <path d="M0 0 H22 V630 H0 Z" fill="#ffd000"/>
-      <path d="M22 0 H29 V630 H22 Z" fill="#1597ff"/>
+      <path d="M0 0 H6 V630 H0 Z" fill="#ffb830"/>
       <g transform="translate(68 62)">
-        <rect width="430" height="46" rx="4" fill="#ffd000"/>
+        <rect width="430" height="46" rx="4" fill="#ffb830"/>
         <text x="20" y="32" class="eyebrow">${escapeXml(eyebrow || "PASS THE APTITUDE TEST")}</text>
       </g>
       ${headline}
       <g transform="translate(68 522)">
-        <rect width="500" height="60" rx="6" fill="#ffd000"/>
-        <path d="M22 47 L40 16 L53 16 L43 32 L58 32 L33 55 L39 39 Z" fill="#1597ff"/>
-        <text x="72" y="41" class="brand">BLUE COLLAR EXAM PREP</text>
+        <rect width="365" height="60" rx="6" fill="#ffb830"/>
+        <text x="22" y="40" class="brand">BLUE COLLAR EXAM PREP</text>
       </g>
-      <text x="590" y="561" class="footer">${escapeXml(footer || "STUDY SMARTER. GET UNION READY.")}</text>
-      <path d="M1124 42 l-24 43 h22 l-17 34 49-52 h-24 l19-25 z" fill="#ffd000" opacity=".95"/>
+      <text x="465" y="561" class="footer">${escapeXml(footer || "STUDY SMARTER. GET UNION READY.")}</text>
+      <path d="M1124 42 l-24 43 h22 l-17 34 49-52 h-24 l19-25 z" fill="#ffb830" opacity=".95"/>
     </svg>
   `);
 }

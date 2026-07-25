@@ -1,20 +1,21 @@
 :root {
   color-scheme: dark;
-  --bg: #07101d;
-  --bg-deep: #03070c;
-  --panel: #0c1928;
-  --panel-2: #101f30;
-  --line: #22364a;
-  --line-soft: #172a3d;
-  --text: #f4f8fb;
-  --muted: #91a8bb;
-  --blue: #168fff;
-  --blue-2: #42c5ff;
-  --yellow: #ffd000;
-  --danger: #ff6b68;
-  --success: #52d79a;
+  --bg: #1a1a2e;
+  --bg-deep: #16213e;
+  --panel: #16213e;
+  --panel-2: #1a1a2e;
+  --line: rgba(255, 255, 255, 0.18);
+  --line-soft: rgba(255, 255, 255, 0.1);
+  --text: #ffffff;
+  --muted: rgba(255, 255, 255, 0.72);
+  --blue: #5ba8d6;
+  --blue-2: #7ec8e3;
+  --yellow: #ffb830;
+  --yellow-hover: #d99a1a;
+  --danger: #e8722a;
+  --success: #7ec8e3;
   --radius: 12px;
-  font-family: Inter, "Segoe UI", Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
 }
 
 * {
@@ -45,8 +46,7 @@ button {
   display: grid;
   grid-template-rows: 72px minmax(0, 1fr) 292px;
   background:
-    radial-gradient(circle at 78% -20%, #103e6d 0, transparent 35%),
-    var(--bg);
+    linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
 }
 
 .app-shell.terminal-collapsed {
@@ -59,7 +59,7 @@ button {
   justify-content: space-between;
   padding: 0 22px;
   border-bottom: 1px solid var(--line);
-  background: rgba(5, 13, 23, 0.95);
+  background: rgba(26, 26, 46, 0.95);
 }
 
 .brand-lockup,
@@ -83,7 +83,7 @@ button {
   height: 46px;
   border-radius: 10px;
   object-fit: cover;
-  box-shadow: 0 0 0 1px #258eff, 0 0 22px #1678d355;
+  box-shadow: 0 0 0 1px var(--yellow), 0 0 22px #ffb83033;
 }
 
 .brand-lockup div {
@@ -110,7 +110,7 @@ button {
 .path-button,
 .icon-button {
   border: 1px solid var(--line);
-  background: #0b1724;
+  background: var(--bg-deep);
   border-radius: 7px;
   padding: 9px 12px;
   cursor: pointer;
@@ -121,7 +121,7 @@ button {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  color: #cfe0ee;
+  color: var(--text);
   text-align: left;
 }
 
@@ -138,14 +138,15 @@ button {
 .sidebar {
   padding: 22px 14px;
   border-right: 1px solid var(--line);
-  background: rgba(5, 13, 23, 0.78);
+  background: rgba(22, 33, 62, 0.78);
   overflow-y: auto;
 }
 
 .nav-label,
 .kicker {
   margin: 0 0 10px;
-  color: var(--blue-2);
+  color: var(--yellow);
+  font-family: Oswald, "Arial Narrow", sans-serif;
   font-size: 11px;
   font-weight: 800;
   letter-spacing: 2.5px;
@@ -166,18 +167,18 @@ button {
 }
 
 .nav-item:hover {
-  background: #0f1e2e;
+  background: rgba(255, 255, 255, 0.06);
 }
 
 .nav-item.active {
-  background: linear-gradient(90deg, #112a42, #0c1928);
-  border-color: #205988;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  border-color: var(--yellow);
   box-shadow: inset 3px 0 var(--yellow);
 }
 
 .nav-number {
-  color: var(--blue-2);
-  font: 800 12px "Cascadia Code", monospace;
+  color: var(--yellow);
+  font: 700 12px Oswald, "Arial Narrow", sans-serif;
   padding-top: 3px;
 }
 
@@ -201,9 +202,9 @@ button {
   padding: 13px;
   display: flex;
   gap: 10px;
-  border: 1px dashed #2e536f;
+  border: 1px dashed var(--line);
   border-radius: 9px;
-  color: #cfe0ee;
+  color: var(--text);
 }
 
 .sidebar-note p {
@@ -249,7 +250,8 @@ button {
 
 .view-heading h1 {
   margin: 0 0 8px;
-  font-size: 30px;
+  font-size: 32px;
+  font-weight: 900;
   line-height: 1.08;
   letter-spacing: -0.8px;
 }
@@ -257,23 +259,24 @@ button {
 .view-heading p:not(.kicker) {
   margin: 0;
   color: var(--muted);
-  max-width: 720px;
+  max-width: 620px;
 }
 
 .format-pill {
   padding: 8px 11px;
-  border: 1px solid #236da6;
+  border: 1px solid var(--blue);
   border-radius: 999px;
-  color: #9bd8ff;
-  background: #0b2740;
+  color: var(--text);
+  background: var(--bg-deep);
+  font-family: Oswald, "Arial Narrow", sans-serif;
   font-size: 12px;
   white-space: nowrap;
 }
 
 .format-pill.warning {
-  border-color: #705b13;
-  background: #29220b;
-  color: #ffe276;
+  border-color: var(--yellow);
+  background: #ffb83022;
+  color: var(--yellow);
 }
 
 .two-column,
@@ -291,7 +294,7 @@ button {
 .panel {
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  background: linear-gradient(145deg, rgba(17, 34, 52, 0.97), rgba(10, 23, 36, 0.97));
+  background: linear-gradient(135deg, rgba(26, 26, 46, 0.97), rgba(22, 33, 62, 0.97));
   box-shadow: 0 16px 40px #00000022;
 }
 
@@ -306,7 +309,7 @@ button {
 .field label {
   display: block;
   margin-bottom: 7px;
-  color: #dceaf4;
+  color: var(--text);
   font-size: 12px;
   font-weight: 700;
 }
@@ -321,7 +324,7 @@ button {
   width: 100%;
   border: 1px solid #2a4257;
   border-radius: 7px;
-  background: #07121e;
+  background: var(--bg);
   color: var(--text);
   padding: 10px 11px;
   outline: none;
@@ -330,8 +333,8 @@ button {
 
 .field input:focus,
 .field textarea:focus {
-  border-color: var(--blue);
-  box-shadow: 0 0 0 3px #168fff22;
+  border-color: var(--yellow);
+  box-shadow: 0 0 0 3px #ffb83022;
 }
 
 .field input[type="range"] {
@@ -357,10 +360,10 @@ button {
   align-items: center;
   justify-content: space-between;
   gap: 10px;
-  border: 1px dashed #37637f;
+  border: 1px dashed var(--line);
   border-radius: 8px;
   padding: 10px 12px;
-  background: #0a1724;
+  background: var(--bg);
   cursor: pointer;
   text-align: left;
 }
@@ -369,7 +372,7 @@ button {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  color: #cfe0ee;
+  color: var(--text);
 }
 
 .file-picker b {
@@ -397,18 +400,20 @@ button {
 .primary-button {
   width: 100%;
   min-height: 46px;
-  color: #07101d;
-  background: linear-gradient(135deg, #ffd000, #f0a900);
-  box-shadow: 0 8px 24px #d9970026;
+  color: #1a1a2e;
+  background: linear-gradient(135deg, #ffb830 0%, #f5a623 40%, #f09819 100%);
+  box-shadow: 0 8px 24px #d99a1a33;
+  font-family: Oswald, "Arial Narrow", sans-serif;
 }
 
 .primary-button:hover {
-  filter: brightness(1.07);
+  background: #d99a1a;
 }
 
 .secondary-button {
-  background: #12314d;
-  color: #bfe6ff;
+  background: linear-gradient(135deg, #7ec8e3 0%, #5ba8d6 40%, #2e6da4 100%);
+  color: #1a1a2e;
+  font-family: Oswald, "Arial Narrow", sans-serif;
 }
 
 button:disabled {
@@ -436,7 +441,7 @@ button:disabled {
   justify-content: space-between;
   gap: 12px;
   border-bottom: 1px solid var(--line);
-  background: #081522;
+  background: var(--bg-deep);
 }
 
 .panel-title > div:first-child {
@@ -465,8 +470,8 @@ button:disabled {
   gap: 8px;
   color: var(--muted);
   background:
-    linear-gradient(#168fff0e 1px, transparent 1px),
-    linear-gradient(90deg, #168fff0e 1px, transparent 1px);
+    linear-gradient(#ffb8300e 1px, transparent 1px),
+    linear-gradient(90deg, #ffb8300e 1px, transparent 1px);
   background-size: 32px 32px;
 }
 
@@ -475,12 +480,12 @@ button:disabled {
   height: 96px;
   display: grid;
   place-items: center;
-  border: 2px solid var(--blue);
+  border: 2px solid var(--yellow);
   border-radius: 22px;
   margin-bottom: 6px;
   color: var(--yellow);
-  font: 900 23px Impact, sans-serif;
-  box-shadow: 0 0 28px #168fff44, inset 0 0 24px #168fff22;
+  font: 900 23px -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  box-shadow: 0 0 28px #ffb83044, inset 0 0 24px #ffb83022;
 }
 
 .feature-preview {
@@ -488,7 +493,7 @@ button:disabled {
   height: calc(100% - 58px);
   min-height: 420px;
   object-fit: contain;
-  background: #03070c;
+  background: var(--bg-deep);
 }
 
 .text-button,
@@ -550,7 +555,7 @@ button:disabled {
 
 .article-preview {
   overflow: auto;
-  font: 15px/1.68 Inter, "Segoe UI", sans-serif;
+  font: 15px/1.68 -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
 }
 
 .article-preview h1 {
@@ -559,11 +564,11 @@ button:disabled {
 
 .article-preview h2 {
   margin-top: 28px;
-  color: #f6ce24;
+  color: var(--yellow);
 }
 
 .article-preview h3 {
-  color: #77cfff;
+  color: var(--blue-2);
 }
 
 .article-preview code {
